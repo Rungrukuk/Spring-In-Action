@@ -34,6 +34,7 @@ public class DesignTacoController {
         this.ingredientRepo = ingredientRepo;
     }
 
+    @SuppressWarnings("null")
     @ModelAttribute
     public void addIngredientsToModel(Model model){
         Iterable<Ingredient> ingredients = ingredientRepo.findAll();
@@ -62,6 +63,7 @@ public class DesignTacoController {
     @PostMapping
     public String processTaco(@Valid Taco taco, Errors errors,@ModelAttribute TacoOrder tacoOrder){
         if(errors.hasErrors()){
+            log.info(errors.toString());
             return "design";
         }
         

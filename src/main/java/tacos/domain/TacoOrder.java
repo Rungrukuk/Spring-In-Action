@@ -2,6 +2,9 @@ package tacos.domain;
 import java.util.List;
 
 import org.hibernate.validator.constraints.CreditCardNumber;
+import org.springframework.data.annotation.Id;
+// import org.springframework.data.relational.core.mapping.Column;
+import org.springframework.data.relational.core.mapping.Table;
 
 import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.NotBlank;
@@ -12,12 +15,15 @@ import java.util.ArrayList;
 import lombok.Data;
 
 @Data
+@Table  //* @Table("Taco_Cloud_Order") to imply that this class will associate with Taco_Cloud_Order tabel in the database
 public class TacoOrder {
 
+    @Id
     private Long id;
 
     private Date placedAt;
-
+    // @Column("delivery_name") to explicitly map this property to delivery_name 
+    // column but in our case Spring boot will automatically map them becuase of the name of property
     @NotBlank(message = "Delivery  name is required")
     private String deliveryName;
 
