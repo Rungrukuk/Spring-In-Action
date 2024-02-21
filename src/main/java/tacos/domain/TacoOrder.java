@@ -27,7 +27,8 @@ import lombok.Data;
 @Entity
 public class TacoOrder {
 
-    // * private static final long serialVersionUID = 1L; I do not exactly know what the hell this 
+    // * private static final long serialVersionUID = 1L; I do not exactly know what
+    // the hell this
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

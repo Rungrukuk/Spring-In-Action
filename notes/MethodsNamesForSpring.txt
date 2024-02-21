@@ -1,0 +1,25 @@
+IsAfter, After, IsGreaterThan, GreaterThan
+IsGreaterThanEqual, GreaterThanEqual
+IsBefore, Before, IsLessThan, LessThan
+IsLessThanEqual, LessThanEqual
+IsBetween, Between
+IsNull, Null
+IsNotNull, NotNull
+IsIn, In
+IsNotIn, NotIn
+IsStartingWith, StartingWith, StartsWith
+IsEndingWith, EndingWith, EndsWith
+IsContaining, Containing, Contains
+IsLike, Like
+IsNotLike, NotLike
+IsTrue, True
+IsFalse, False
+Is, Equals
+IsNot, Not
+IgnoringCase, IgnoresCase
+
+
+As alternatives for IgnoringCase and IgnoresCase, you can place either AllIgnoringCase or AllIgnoresCase on the method to ignore case for all String comparisons.
+For example, consider the following method:
+List<TacoOrder> findByDeliveryToAndDeliveryCityAllIgnoresCase(
+ String deliveryTo, String deliveryCity);
