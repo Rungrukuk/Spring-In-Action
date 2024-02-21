@@ -1,21 +1,21 @@
 package tacos.domain;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.relational.core.mapping.Table; //JDCB-DATA
+// import org.springframework.data.annotation.Id;
+// import org.springframework.data.relational.core.mapping.Table; //JDCB-DATA
 
-// import javax.persistence.Id;
-// import jakarta.persistence.Entity;
+import javax.persistence.Id;
+import jakarta.persistence.Entity;
 
-// import lombok.AllArgsConstructor;
+import lombok.AllArgsConstructor;
 import lombok.Data;
-// import lombok.NoArgsConstructor;
-// import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+import lombok.AccessLevel;
 
-@Table // JDCB-DATA
+// @Table // JDCB-DATA
 @Data
-// @Entity
-// @AllArgsConstructor
-// @NoArgsConstructor(access=AccessLevel.PRIVATE, force = true)
+@Entity
+@AllArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
 public class Ingredient {
 
     @Id

@@ -1,10 +1,11 @@
 package tacos.domain;
+
 import java.util.List;
 
 import org.hibernate.validator.constraints.CreditCardNumber;
 import org.springframework.data.annotation.Id;
 // import org.springframework.data.relational.core.mapping.Column;
-import org.springframework.data.relational.core.mapping.Table;
+// import org.springframework.data.relational.core.mapping.Table;
 
 import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.NotBlank;
@@ -15,15 +16,17 @@ import java.util.ArrayList;
 import lombok.Data;
 
 @Data
-@Table  //* @Table("Taco_Cloud_Order") to imply that this class will associate with Taco_Cloud_Order tabel in the database
+// @Table //* @Table("Taco_Cloud_Order") to imply that this class will associate
+// with Taco_Cloud_Order tabel in the database
 public class TacoOrder {
 
     @Id
     private Long id;
 
     private Date placedAt;
-    // @Column("delivery_name") to explicitly map this property to delivery_name 
-    // column but in our case Spring boot will automatically map them becuase of the name of property
+    // @Column("delivery_name") to explicitly map this property to delivery_name
+    // column but in our case Spring boot will automatically map them becuase of the
+    // name of property
     @NotBlank(message = "Delivery  name is required")
     private String deliveryName;
 
@@ -42,7 +45,7 @@ public class TacoOrder {
     @CreditCardNumber(message = "Not a valid card number")
     private String ccNumber;
 
-    @Pattern(regexp = "^(0[1-9]|1[0-2])([\\/])([2-9][0-9])",  message = "Must be formatted MM/YY")
+    @Pattern(regexp = "^(0[1-9]|1[0-2])([\\/])([2-9][0-9])", message = "Must be formatted MM/YY")
     private String ccExpiration;
 
     @Digits(integer = 3, fraction = 0, message = "Invalid CVV")
@@ -50,7 +53,7 @@ public class TacoOrder {
 
     private List<Taco> tacos = new ArrayList<>();
 
-    public void addTaco(Taco taco){
+    public void addTaco(Taco taco) {
         this.tacos.add(taco);
     }
 }
