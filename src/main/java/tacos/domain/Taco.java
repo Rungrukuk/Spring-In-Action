@@ -2,8 +2,16 @@ package tacos.domain;
 
 import java.util.Date;
 import java.util.List;
+import java.util.ArrayList;
 
-import org.springframework.data.annotation.Id;
+import javax.persistence.Id;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.ManyToMany;
+
+// import org.springframework.data.annotation.Id;
 // import org.springframework.data.relational.core.mapping.Table;
 
 import jakarta.validation.constraints.NotNull;
@@ -12,9 +20,11 @@ import lombok.Data;
 
 @Data
 // @Table
+@Entity
 public class Taco {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     private Date createdAt = new Date();
@@ -25,6 +35,11 @@ public class Taco {
 
     @NotNull
     @Size(min = 1, message = "You must choose at least 1 ingredient")
-    private List<IngredientRef> ingredients;
+    @ManyToMany
+    private List<Ingredient> ingredients = new ArrayList<>();
+
+    public void addIngredient(Ingredient ingredient) {
+        this.ingredients.add(ingredient);
+    }
 
 }

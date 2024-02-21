@@ -9,11 +9,12 @@ import org.springframework.data.repository.CrudRepository;
 import tacos.domain.Ingredient;
 
 public interface IngredientRepository extends CrudRepository<Ingredient, String> {
-    //? CRUD Repository already have this methods by default
+    // ? CRUD Repository already have this methods by default - This Interface can
+    // work with both JPA and JDCB-Data
 
     // Iterable<Ingredient> findAll();
-    
+
     // Optional<Ingredient> findById(String id);
-    
+
     // Ingredient save(Ingredient ingredient);
 }
