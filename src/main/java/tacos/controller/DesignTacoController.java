@@ -18,8 +18,10 @@ import lombok.extern.slf4j.Slf4j;
 import tacos.domain.Ingredient;
 import tacos.domain.Ingredient.Type;
 import tacos.repository.IngredientRepository;
+import tacos.utils.TacoUDRUtils;
 import tacos.domain.Taco;
 import tacos.domain.TacoOrder;
+import tacos.domain.TacoUDT;
 
 @Slf4j
 @Controller
@@ -34,7 +36,6 @@ public class DesignTacoController {
         this.ingredientRepo = ingredientRepo;
     }
 
-    @SuppressWarnings("null")
     @ModelAttribute
     public void addIngredientsToModel(Model model) {
         Iterable<Ingredient> ingredients = ingredientRepo.findAll();
@@ -67,7 +68,9 @@ public class DesignTacoController {
             return "design";
         }
 
-        tacoOrder.addTaco(taco);
+        TacoUDT tacoUDT = TacoUDRUtils.toTacoUDT(taco);
+        tacoOrder.addTaco(tacoUDT);
+
         log.info("Processing taco: {}", taco);
         return "redirect:/orders/current";
     }
