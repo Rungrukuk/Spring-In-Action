@@ -1,5 +1,7 @@
 package tacos.controller;
 
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,11 +23,11 @@ import tacos.repository.OrderRepository;
 @RequestMapping("/orders")
 @SessionAttributes("tacoOrder")
 public class OrderController {
-    
+
     private OrderRepository orderRepo;
 
     @Autowired
-    public OrderController(OrderRepository orderRepo){
+    public OrderController(OrderRepository orderRepo) {
         this.orderRepo = orderRepo;
     }
 
@@ -36,15 +38,17 @@ public class OrderController {
 
     @PostMapping
     public String processOrder(@Valid TacoOrder order, Errors errors,
-        SessionStatus sessionStatus) {
-            
-            if (errors.hasErrors()) {
-                log.info(errors.toString());
-                return "orderForm";
-            }
-            orderRepo.save(order);
-            sessionStatus.setComplete();
-            return "redirect:/";
+            SessionStatus sessionStatus) {
+
+        if (errors.hasErrors()) {
+            log.info(errors.toString());
+            return "orderForm";
         }
+        order.setPlacedAt(new Date());
+        orderRepo.save(order);
+        log.info("Processing order: {}", order);
+        sessionStatus.setComplete();
+        return "redirect:/";
+    }
 
 }

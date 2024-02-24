@@ -1,13 +1,20 @@
 package tacos.repository;
 
-import java.util.Optional;
+// import java.util.Optional;
+
+// import org.springframework.data.repository.Repository;
+
+import org.springframework.data.repository.CrudRepository;
+
 import tacos.domain.Ingredient;
 
-public interface IngredientRepository {
-    Iterable<Ingredient> findAll();
+public interface IngredientRepository extends CrudRepository<Ingredient, String> {
+    // ? CRUD Repository already have this methods by default - This Interface can
+    // work with both JPA and JDCB-Data
 
-    Optional<Ingredient> findById(String id);
+    // Iterable<Ingredient> findAll();
 
-    Ingredient save(Ingredient ingredient);
+    // Optional<Ingredient> findById(String id);
 
+    // Ingredient save(Ingredient ingredient);
 }
