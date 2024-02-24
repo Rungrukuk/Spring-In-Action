@@ -46,6 +46,7 @@ public class OrderController {
         }
         order.setPlacedAt(new Date());
         orderRepo.save(order);
+        log.info("Processing order: {}", order);
         sessionStatus.setComplete();
         return "redirect:/";
     }

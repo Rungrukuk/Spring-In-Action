@@ -47,14 +47,15 @@ public interface OrderRepository extends CrudRepository<TacoOrder, String> {
     // AllIgnoringCase or AllIgnoresCase on the method to ignore case for all String
     // comparisons.
     // For example, consider the following method:
-    List<TacoOrder> findByDeliveryToAndDeliveryCityAllIgnoresCase(
-            String deliveryTo, String deliveryCity);
+    List<TacoOrder> findByDeliveryNameAndDeliveryCityAllIgnoreCase(
+            String deliveryName, String deliveryCity);
 
     // Finally, you can also place OrderBy at the end of the method name to sort the
     // results
-    // by a specified column. For example, to order by the deliveryTo property, use
+    // by a specified column. For example, to order by the deliveryName property,
+    // use
     // the following code:
-    List<TacoOrder> findByDeliveryCityOrderByDeliveryTo(String city);
+    List<TacoOrder> findByDeliveryCityOrderByDeliveryName(String city);
 
     // Although the naming convention can be useful for relatively simple queries,
     // it doesn’t
@@ -64,6 +65,6 @@ public interface OrderRepository extends CrudRepository<TacoOrder, String> {
     // annotate it with @Query to explicitly specify the query to be performed when
     // the
     // method is called, as this example shows:
-    @Query("Order o where o.deliveryCity='Seattle'")
+    @Query("SELECT o FROM TacoOrder o WHERE o.deliveryCity='Seattle'")
     List<TacoOrder> readOrdersDeliveredInSeattle();
 }

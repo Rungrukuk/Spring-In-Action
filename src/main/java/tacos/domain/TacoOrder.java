@@ -2,14 +2,15 @@ package tacos.domain;
 
 import java.util.List;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 
 import org.hibernate.validator.constraints.CreditCardNumber;
-import org.springframework.data.annotation.Id;
+// import org.springframework.data.annotation.Id;
 // import org.springframework.data.relational.core.mapping.Column;
 // import org.springframework.data.relational.core.mapping.Table;
 
+import jakarta.persistence.Id;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
