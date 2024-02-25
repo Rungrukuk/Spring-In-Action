@@ -14,11 +14,11 @@ import jakarta.validation.constraints.Size;
  * import org.springframework.data.relational.core.mapping.Table;  ---JDBC
  */
 
-// * import jakarta.persistence.Entity;   --- JPA
-// * import jakarta.persistence.GeneratedValue;   --- JPA
-// * import jakarta.persistence.GenerationType;   --- JPA
-// * import jakarta.persistence.Id;   --- JPA
-// * import jakarta.persistence.ManyToMany;   --- JPA
+import jakarta.persistence.Entity;//   --- JPA
+import jakarta.persistence.GeneratedValue;//   --- JPA
+import jakarta.persistence.GenerationType;//   --- JPA
+import jakarta.persistence.Id;//   --- JPA
+import jakarta.persistence.ManyToMany;//   --- JPA
 
 // * import org.springframework.data.cassandra.core.cql.Ordering;  --- Cassandra
 // * import org.springframework.data.cassandra.core.cql.PrimaryKeyType;  --- Cassandra
@@ -35,12 +35,13 @@ import lombok.Data;
 // import tacos.utils.TacoUDRUtils;  --- Cassandra
 
 @Data
-// @Entity
+@Entity // --- JPA
 // @Table("tacos")
 public class Taco {
 
-    // @Id --- JPA
-    // @GeneratedValue(strategy = GenerationType.AUTO) --- JPA
+    @Id // --- JPA
+    @GeneratedValue(strategy = GenerationType.AUTO) // --- JPA
+    private Long id;
     // @PrimaryKeyColumn(type = PrimaryKeyType.PARTITIONED) --- Cassandra
     // private UUID id = Uuids.timeBased(); --- Cassandra
 
@@ -53,7 +54,7 @@ public class Taco {
     private Date createdAt = new Date();
 
     @Size(min = 1, message = "You must choose at least 1 ingredient")
-    // @ManyToMany --- JPA
+    @ManyToMany // --- JPA
     // @Column("ingredients") --- Cassandra
     private List<Ingredient> ingredients = new ArrayList<>();
 

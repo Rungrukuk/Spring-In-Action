@@ -1,10 +1,10 @@
 package tacos.domain;
 
-import org.springframework.data.annotation.Id; // * Both for JDBC and Mongo
-import org.springframework.data.mongodb.core.mapping.Document;
+// import org.springframework.data.annotation.Id; // * Both for JDBC and Mongo
+// import org.springframework.data.mongodb.core.mapping.Document; // * Mongo
 
-//  * import jakarta.persistence.Entity;    --- JPA
-//  * import jakarta.persistence.Id;        --- JPA 
+import jakarta.persistence.Entity; // --- JPA
+import jakarta.persistence.Id; // --- JPA 
 
 //  * import org.springframework.data.cassandra.core.mapping.PrimaryKey;   --- Cassandra
 //  * import org.springframework.data.cassandra.core.mapping.Table;   --- Cassandra
@@ -15,9 +15,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-// * @Entity --- JPA
+@Entity // --- JPA
 // * @Table("ingredients") --- JDBC and Cassandra
-@Document(collection = "ingredients")
+// @Document(collection = "ingredients")
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
 public class Ingredient {
