@@ -5,9 +5,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import lombok.extern.slf4j.Slf4j;
 import tacos.repository.UserRepository;
 import tacos.security.RegistrationForm;
 
+@Slf4j
 @Controller
 @RequestMapping("/register")
 public class RegistrationController {
@@ -28,6 +31,7 @@ public class RegistrationController {
 
     @PostMapping
     public String processRegistration(RegistrationForm form) {
+        log.info(form.toString());
         userRepo.save(form.toUser(passwordEncoder));
         return "redirect:/login";
     }
