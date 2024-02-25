@@ -2,10 +2,13 @@ package tacos.repository;
 
 import tacos.domain.TacoOrder;
 
-import java.util.Date;
-import java.util.List;
+// import java.util.Date;
+// import java.util.List;
+// import java.util.UUID; --- Cassandra
+// import java.util.Long; --- JPA
+// import java.util.String; --- MongoDB
 
-import org.springframework.data.jpa.repository.Query;
+// import org.springframework.data.jpa.repository.Query; --- JPA
 import org.springframework.data.repository.CrudRepository;
 
 public interface OrderRepository extends CrudRepository<TacoOrder, String> {
@@ -13,7 +16,7 @@ public interface OrderRepository extends CrudRepository<TacoOrder, String> {
     // work with both JPA and JDCB-Data
 
     // * Spring is clever enough to create this method by parsing it's name
-    List<TacoOrder> findByDeliveryZip(String Zip);
+    // List<TacoOrder> findByDeliveryZip(String Zip);
 
     /*
      * Some other Interesting examples that Spring can craete methods by parsing the
@@ -23,7 +26,8 @@ public interface OrderRepository extends CrudRepository<TacoOrder, String> {
      */
 
     // ? Instead of read get or find are also available
-    List<TacoOrder> readOrdersByDeliveryZipAndPlacedAtBetween(String deliveryZip, Date startDate, Date endDate);
+    // List<TacoOrder> readOrdersByDeliveryZipAndPlacedAtBetween(String deliveryZip,
+    // Date startDate, Date endDate);
     /*
      * As you can see, the verb in readOrdersByDeliveryZipAndPlacedAtBetween()
      * is read. Spring Data also understands find, read, and get as synonymous for
@@ -47,15 +51,15 @@ public interface OrderRepository extends CrudRepository<TacoOrder, String> {
     // AllIgnoringCase or AllIgnoresCase on the method to ignore case for all String
     // comparisons.
     // For example, consider the following method:
-    List<TacoOrder> findByDeliveryNameAndDeliveryCityAllIgnoreCase(
-            String deliveryName, String deliveryCity);
+    // List<TacoOrder> findByDeliveryNameAndDeliveryCityAllIgnoreCase(
+    // String deliveryName, String deliveryCity);
 
     // Finally, you can also place OrderBy at the end of the method name to sort the
     // results
     // by a specified column. For example, to order by the deliveryName property,
     // use
     // the following code:
-    List<TacoOrder> findByDeliveryCityOrderByDeliveryName(String city);
+    // List<TacoOrder> findByDeliveryCityOrderByDeliveryName(String city);
 
     // Although the naming convention can be useful for relatively simple queries,
     // it doesn’t
@@ -65,6 +69,6 @@ public interface OrderRepository extends CrudRepository<TacoOrder, String> {
     // annotate it with @Query to explicitly specify the query to be performed when
     // the
     // method is called, as this example shows:
-    @Query("SELECT o FROM TacoOrder o WHERE o.deliveryCity='Seattle'")
-    List<TacoOrder> readOrdersDeliveredInSeattle();
+    // @Query("SELECT o FROM TacoOrder o WHERE o.deliveryCity='Seattle'")
+    // List<TacoOrder> readOrdersDeliveredInSeattle();
 }

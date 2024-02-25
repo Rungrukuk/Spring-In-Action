@@ -20,6 +20,8 @@ import tacos.domain.Ingredient.Type;
 import tacos.repository.IngredientRepository;
 import tacos.domain.Taco;
 import tacos.domain.TacoOrder;
+// import tacos.utils.TacoUDRUtils;  --- Cassandra
+// import tacos.domain.TacoUDT;  --- Cassandra
 
 @Slf4j
 @Controller
@@ -34,7 +36,6 @@ public class DesignTacoController {
         this.ingredientRepo = ingredientRepo;
     }
 
-    @SuppressWarnings("null")
     @ModelAttribute
     public void addIngredientsToModel(Model model) {
         Iterable<Ingredient> ingredients = ingredientRepo.findAll();
@@ -67,7 +68,10 @@ public class DesignTacoController {
             return "design";
         }
 
+        // TacoUDT tacoUDT = TacoUDRUtils.toTacoUDT(taco); --- Cassandra
+        // tacoOrder.addTaco(tacoUDT); --- Cassandra
         tacoOrder.addTaco(taco);
+
         log.info("Processing taco: {}", taco);
         return "redirect:/orders/current";
     }
