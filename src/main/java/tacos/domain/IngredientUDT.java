@@ -1,19 +1,20 @@
-package tacos.domain;
+// ? Cassandra
+// package tacos.domain;
 
-import org.springframework.data.cassandra.core.mapping.UserDefinedType;
-import lombok.AccessLevel;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
+// import org.springframework.data.cassandra.core.mapping.UserDefinedType;
+// import lombok.AccessLevel;
+// import lombok.Data;
+// import lombok.NoArgsConstructor;
+// import lombok.RequiredArgsConstructor;
 
-@Data
-@RequiredArgsConstructor
-@NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
-@UserDefinedType("ingredient")
-public class IngredientUDT {
+// @Data
+// @RequiredArgsConstructor
+// @NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
+// @UserDefinedType("ingredient")
+// public class IngredientUDT {
 
-    private final String name;
+// private final String name;
 
-    private final Ingredient.Type type;
+// private final Ingredient.Type type;
 
-}
+// }

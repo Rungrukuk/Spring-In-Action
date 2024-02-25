@@ -18,10 +18,10 @@ import lombok.extern.slf4j.Slf4j;
 import tacos.domain.Ingredient;
 import tacos.domain.Ingredient.Type;
 import tacos.repository.IngredientRepository;
-import tacos.utils.TacoUDRUtils;
 import tacos.domain.Taco;
 import tacos.domain.TacoOrder;
-import tacos.domain.TacoUDT;
+// import tacos.utils.TacoUDRUtils;  --- Cassandra
+// import tacos.domain.TacoUDT;  --- Cassandra
 
 @Slf4j
 @Controller
@@ -68,8 +68,9 @@ public class DesignTacoController {
             return "design";
         }
 
-        TacoUDT tacoUDT = TacoUDRUtils.toTacoUDT(taco);
-        tacoOrder.addTaco(tacoUDT);
+        // TacoUDT tacoUDT = TacoUDRUtils.toTacoUDT(taco); --- Cassandra
+        // tacoOrder.addTaco(tacoUDT); --- Cassandra
+        tacoOrder.addTaco(taco);
 
         log.info("Processing taco: {}", taco);
         return "redirect:/orders/current";

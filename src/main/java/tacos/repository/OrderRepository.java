@@ -4,12 +4,14 @@ import tacos.domain.TacoOrder;
 
 // import java.util.Date;
 // import java.util.List;
-import java.util.UUID;
+// import java.util.UUID; --- Cassandra
+// import java.util.Long; --- JPA
+// import java.util.String; --- MongoDB
 
 // import org.springframework.data.jpa.repository.Query; --- JPA
 import org.springframework.data.repository.CrudRepository;
 
-public interface OrderRepository extends CrudRepository<TacoOrder, UUID> {
+public interface OrderRepository extends CrudRepository<TacoOrder, String> {
     // ? CRUD Repository already have this methods by default - This Interface can
     // work with both JPA and JDCB-Data
 
