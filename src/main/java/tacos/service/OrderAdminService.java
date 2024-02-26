@@ -4,9 +4,11 @@ package tacos.service;
 
 // import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.stereotype.Service;
 
 import tacos.repository.OrderRepository;
 
+@Service
 public class OrderAdminService {
     OrderRepository orderRepository;
 

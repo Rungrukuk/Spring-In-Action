@@ -15,6 +15,7 @@ import jakarta.persistence.GenerationType;//  --- JPA
 // import org.springframework.data.mongodb.core.mapping.Document; --- MongoDB
 
 import jakarta.persistence.Id;//  --- JPA
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.CascadeType;//  --- JPA
 import jakarta.persistence.Entity;//  --- JPA
 import jakarta.persistence.OneToMany;//  --- JPA
@@ -51,6 +52,9 @@ public class TacoOrder implements Serializable {
 
     // @PrimaryKey --- Cassandra
     // private UUID id = Uuids.timeBased();
+
+    @ManyToOne
+    private User user;
 
     private Date placedAt = new Date();
     // @Column("delivery_name") to explicitly map this property to delivery_name ---
