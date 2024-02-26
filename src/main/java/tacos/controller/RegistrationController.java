@@ -32,7 +32,13 @@ public class RegistrationController {
     @PostMapping
     public String processRegistration(RegistrationForm form) {
         log.info(form.toString());
-        userRepo.save(form.toUser(passwordEncoder));
-        return "redirect:/login";
+        if (form.getPassword().equals(form.getConfirm())) {
+            userRepo.save(form.toUser(passwordEncoder));
+            return "redirect:/login";
+        }
+        log.info(form.getPassword());
+        log.info(form.getConfirm());
+        log.info("Make sure paswwords are same");
+        return this.registerForm();
     }
 }

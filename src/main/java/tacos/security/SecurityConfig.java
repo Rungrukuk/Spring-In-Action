@@ -64,7 +64,10 @@ public class SecurityConfig {
                         .requestMatchers("/", "/**").permitAll())
                 .formLogin((formLogin) -> formLogin
                         .defaultSuccessUrl("/design", true)
-                        .loginPage("/login"));
+                        .loginPage("/login"))
+                .logout(logout -> logout.logoutSuccessUrl("/"));
+        // .oauth2Login(oauth2login -> oauth2login.loginPage("/login")); --- Logging in
+        // with Oauth2
         return http.build();
     }
 
