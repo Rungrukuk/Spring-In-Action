@@ -8,10 +8,12 @@
  <body>
     <form method="POST" th:action="@{/logout}">
         <input type="submit" value="Logout"/>
+        <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
     </form>
     <h1>Design your taco!</h1>
     <img th:src="@{/images/TacoCloud.jpg}"/>
         <form method="POST" th:object="${taco}">
+            <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
             <div class="grid">
                 <div class="ingredient-group" id="wraps">
                     <h3>Designate your wrap:</h3>
