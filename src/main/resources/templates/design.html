@@ -6,9 +6,14 @@
  <link rel="stylesheet" th:href="@{/styles.css}" />
  </head>
  <body>
+    <form method="POST" th:action="@{/logout}">
+        <input type="submit" value="Logout"/>
+        <input type="hidden" th:csrf="${_csrf}" />
+    </form>
     <h1>Design your taco!</h1>
     <img th:src="@{/images/TacoCloud.jpg}"/>
         <form method="POST" th:object="${taco}">
+            <input type="hidden" th:csrf="${_csrf}" />
             <div class="grid">
                 <div class="ingredient-group" id="wraps">
                     <h3>Designate your wrap:</h3>

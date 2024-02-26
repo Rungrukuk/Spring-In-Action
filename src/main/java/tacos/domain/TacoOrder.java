@@ -6,18 +6,19 @@ import java.util.Date;
 import java.util.List;
 // import java.util.UUID; --- Cassandra
 
-// import jakarta.persistence.GeneratedValue;  --- JPA
-// import jakarta.persistence.GenerationType;  --- JPA
+import jakarta.persistence.GeneratedValue;//  --- JPA
+import jakarta.persistence.GenerationType;//  --- JPA
 
-import org.springframework.data.annotation.Id; //  --- JDBC, MongoDB
+// import org.springframework.data.annotation.Id; //  --- JDBC, MongoDB
 // import org.springframework.data.relational.core.mapping.Column;  --- JDBC
 // import org.springframework.data.relational.core.mapping.Table;  --- JDBC
-import org.springframework.data.mongodb.core.mapping.Document;
+// import org.springframework.data.mongodb.core.mapping.Document; --- MongoDB
 
-// import jakarta.persistence.Id;  --- JPA
-// import jakarta.persistence.CascadeType;  --- JPA
-// import jakarta.persistence.Entity;  --- JPA
-// import jakarta.persistence.OneToMany;  --- JPA
+import jakarta.persistence.Id;//  --- JPA
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.CascadeType;//  --- JPA
+import jakarta.persistence.Entity;//  --- JPA
+import jakarta.persistence.OneToMany;//  --- JPA
 
 import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.NotBlank;
@@ -35,21 +36,25 @@ import lombok.Data;
 @Data
 // @Table //* @Table("Taco_Cloud_Order") to imply that this class will associate
 // with Taco_Cloud_Order tabel in the database
-// @Entity --- JPA
+@Entity // --- JPA
 // @Table("orders") --- Cassandra
-@Document(collection = "taco_orders")
+// @Document(collection = "taco_orders")
 public class TacoOrder implements Serializable {
 
     // * private static final long serialVersionUID = 1L; I do not exactly know what
     // the hell this
 
-    @Id // --- JDBC, MongoDB
-    private String id;
-    // @Id --- JPA,
-    // private Long id;
-    // @GeneratedValue(strategy = GenerationType.AUTO) --- JPA
+    // @Id // --- JDBC, MongoDB
+    // private String id;
+    @GeneratedValue(strategy = GenerationType.AUTO) // --- JPA
+    @Id // --- JPA,
+    private Long id;
+
     // @PrimaryKey --- Cassandra
     // private UUID id = Uuids.timeBased();
+
+    @ManyToOne
+    private User user;
 
     private Date placedAt = new Date();
     // @Column("delivery_name") to explicitly map this property to delivery_name ---
@@ -81,7 +86,7 @@ public class TacoOrder implements Serializable {
     @Digits(integer = 3, fraction = 0, message = "Invalid CVV")
     private String ccCVV;
 
-    // @OneToMany(cascade = CascadeType.ALL) --- JPA
+    @OneToMany(cascade = CascadeType.ALL) // --- JPA
     // @Column("tacos") --- Cassandra
     private List<Taco> tacos = new ArrayList<>();
 
