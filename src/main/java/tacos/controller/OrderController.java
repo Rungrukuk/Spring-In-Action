@@ -1,13 +1,17 @@
 package tacos.controller;
 
-import java.security.Principal;
+// import java.security.Principal;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+// import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.context.SecurityContextHolder;
+// import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,24 +23,28 @@ import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.validation.Errors;
 
+import tacos.config.OrderProps;
 import tacos.domain.TacoOrder;
 import tacos.domain.User;
 import tacos.repository.OrderRepository;
-import tacos.repository.UserRepository;
+// import tacos.repository.UserRepository;
 
 @Slf4j
 @Controller
 @RequestMapping("/orders")
 @SessionAttributes("tacoOrder")
+@ConfigurationProperties(prefix = "taco.orders")
 public class OrderController {
 
+    private OrderProps props;
     private OrderRepository orderRepo;
-    private UserRepository userRepo;
+    // private UserRepository userRepo;
 
     @Autowired
-    public OrderController(OrderRepository orderRepo, UserRepository userRepo) {
+    public OrderController(OrderRepository orderRepo/* , UserRepository userRepo */, OrderProps props) {
         this.orderRepo = orderRepo;
-        this.userRepo = userRepo;
+        this.props = props;
+        // this.userRepo = userRepo;
     }
 
     @GetMapping("/current")
@@ -45,7 +53,6 @@ public class OrderController {
     }
 
     @PostMapping
-
     public String processOrder(@Valid TacoOrder order, Errors errors,
             SessionStatus sessionStatus// , Principal principal
             // , Authentication authentication
@@ -65,6 +72,15 @@ public class OrderController {
         log.info("Processing order: {}", order);
         sessionStatus.setComplete();
         return "redirect:/";
+    }
+
+    @GetMapping
+    public String ordersForUser(
+            @AuthenticationPrincipal User user, Model model) {
+        Pageable pageable = PageRequest.of(0, props.getPageSize());
+        model.addAttribute("orders",
+                orderRepo.findByUserOrderByPlacedAtDesc(user, pageable));
+        return "orderList";
     }
 
 }
