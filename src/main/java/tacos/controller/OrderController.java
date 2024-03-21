@@ -23,6 +23,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.validation.Errors;
 
+import tacos.config.OrderProps;
 import tacos.domain.TacoOrder;
 import tacos.domain.User;
 import tacos.repository.OrderRepository;
@@ -35,18 +36,15 @@ import tacos.repository.OrderRepository;
 @ConfigurationProperties(prefix = "taco.orders")
 public class OrderController {
 
-    private int pageSize = 20;
+    private OrderProps props;
     private OrderRepository orderRepo;
     // private UserRepository userRepo;
 
     @Autowired
-    public OrderController(OrderRepository orderRepo/* , UserRepository userRepo */) {
+    public OrderController(OrderRepository orderRepo/* , UserRepository userRepo */, OrderProps props) {
         this.orderRepo = orderRepo;
+        this.props = props;
         // this.userRepo = userRepo;
-    }
-
-    public void setPageSize(int pageSize) {
-        this.pageSize = pageSize;
     }
 
     @GetMapping("/current")
@@ -79,7 +77,7 @@ public class OrderController {
     @GetMapping
     public String ordersForUser(
             @AuthenticationPrincipal User user, Model model) {
-        Pageable pageable = PageRequest.of(0, pageSize);
+        Pageable pageable = PageRequest.of(0, props.getPageSize());
         model.addAttribute("orders",
                 orderRepo.findByUserOrderByPlacedAtDesc(user, pageable));
         return "orderList";
