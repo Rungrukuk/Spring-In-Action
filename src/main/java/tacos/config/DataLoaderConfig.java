@@ -2,6 +2,7 @@ package tacos.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+// import org.springframework.context.annotation.Profile;
 
 import tacos.repository.IngredientRepository;
 
@@ -13,6 +14,12 @@ import tacos.domain.Ingredient.Type;;
 @Configuration
 public class DataLoaderConfig {
     @Bean
+    // +++++++++++++++++++++++++++++++++Profiles+++++++++++++++++++++++++++++++++++
+    // @Profile("dev") this means that This code will work only in the development
+    // @Profile({"dev", "qa"}) This is for dev and qa profiles
+    // @Profile("!prod") if profile is not prod
+    // * Also profile annotations can be used on classes too
+    // ---------------------------------Profiles-----------------------------------
     public ApplicationRunner dataLoader(IngredientRepository repo) {
         return args -> {
             repo.save(new Ingredient("FLTO", "Flour Tortilla", Type.WRAP));
