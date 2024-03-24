@@ -10,10 +10,11 @@ import java.util.List;
 // import java.util.String; --- MongoDB
 
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.JpaRepository; // Better version of CRUD repository
 // import org.springframework.data.jpa.repository.Query; --- JPA
-import org.springframework.data.repository.CrudRepository;
+// import org.springframework.data.repository.CrudRepository;
 
-public interface OrderRepository extends CrudRepository<TacoOrder, String> {
+public interface OrderRepository extends JpaRepository<TacoOrder, String> {
 
     List<TacoOrder> findByUserOrderByPlacedAtDesc(User user, Pageable pageable);
     // ? CRUD Repository already have this methods by default - This Interface can
