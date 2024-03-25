@@ -5,6 +5,8 @@ import java.util.Date;
 import java.util.List;
 // import java.util.UUID;  --- Cassandra
 
+import org.springframework.data.rest.core.annotation.RestResource;
+
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
@@ -37,6 +39,7 @@ import lombok.Data;
 @Data
 @Entity // --- JPA
 // @Table("tacos")
+@RestResource(rel = "tacos", path = "tacos") // This is for setting the api path to tacos instead tacoes
 public class Taco {
 
     @Id // --- JPA

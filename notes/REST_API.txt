@@ -1,0 +1,5 @@
+$ curl "localhost:8080/data-api/tacos?sort=createdAt,desc&page=0&size=12"
+
+Here the sort parameter specifies that you should sort by the createdDate property
+and that it should be sorted in descending order (so that the newest tacos are first).
+The page and size parameters specify that you should see the first page of 12 tacos.
