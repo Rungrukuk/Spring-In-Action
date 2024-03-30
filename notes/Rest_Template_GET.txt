@@ -1,0 +1,51 @@
+
+To use RestTemplate, you’ll either need to create an instance at the point you need it, as follows:
+
+RestTemplate rest = new RestTemplate();
+
+or you can declare it as a bean and inject it where you need it, as shown next:
+
+@Bean
+public RestTemplate restTemplate() {
+ return new RestTemplate();
+}
+
+Getting reources with api
+
+public Ingredient getIngredientById(String ingredientId) {
+    return rest.getForObject("http://localhost:8080/ingredients/{id}",
+    Ingredient.class, ingredientId);
+   }
+
+public Ingredient getIngredientById(String ingredientId) {
+    Map<String, String> urlVariables = new HashMap<>();
+    urlVariables.put("id", ingredientId);
+    return rest.getForObject("http://localhost:8080/ingredients/{id}",
+    Ingredient.class, urlVariables);
+}
+
+public Ingredient getIngredientById(String ingredientId) {
+    Map<String, String> urlVariables = new HashMap<>();
+    urlVariables.put("id", ingredientId);
+    URI url = UriComponentsBuilder
+    .fromHttpUrl("http://localhost:8080/ingredients/{id}")
+    .build(urlVariables);
+    return rest.getForObject(url, Ingredient.class);
+   }
+
+getForEntity() works in much the same way as getForObject(), but instead of
+returning a domain object that represents the response’s payload, it returns a
+ResponseEntity object that wraps that domain object. The ResponseEntity gives
+access to additional response details, such as the response headers.
+
+public Ingredient getIngredientById(String ingredientId) {
+    ResponseEntity<Ingredient> responseEntity =
+    rest.getForEntity("http://localhost:8080/ingredients/{id}",
+    Ingredient.class, ingredientId);
+    log.info("Fetched time: {}",
+    responseEntity.getHeaders().getDate());
+    return responseEntity.getBody();
+   }
+
+The getForEntity() method is overloaded with the same parameters as getForObject(), so you can provide the URL variables as a variable list parameter or call
+getForEntity() with a URI object
