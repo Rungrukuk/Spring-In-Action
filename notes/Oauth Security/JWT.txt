@@ -1,0 +1,18 @@
+ The authorization server—An authorization server’s job is to obtain permission
+from a user on behalf of a client application. If the user grants permission, then
+the authorization server gives an access token to the client application that it
+can use to gain authenticated access to an API.
+
+ The resource server—A resource server is just another name for an API that is
+secured by OAuth 2. Although the resource server is part of the API itself, for
+the sake of discussion, the two are often treated as two distinct concepts. The
+resource server restricts access to its resources unless the request provides a
+valid access token with the necessary permission scope. For our purposes, the
+Taco Cloud API we started in chapter 7 will serve as our resource server, once
+we add a bit of security configuration to it.
+
+ The client application—The client application is an application that wants to consume an API but needs permission to do so. We’ll build a simple administrative
+application for Taco Cloud to be able to add new ingredients.
+
+ The user—This is the human who uses the client application and grants the
+application permission to access the resource server’s API on their behalf.

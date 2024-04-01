@@ -1,0 +1,18 @@
+ Implicit grant—Like authorization code grant, implicit grant redirects the user’s
+browser to the authorization server to get user consent. But when redirecting
+back, rather than provide an authorization code in the request, the access
+token is granted implicitly in the request. Although originally designed for
+JavaScript clients running in a browser, this flow is not generally recommended
+anymore, and authorization code grant is preferred.
+
+ User credentials (or password) grant—In this flow, no redirect takes place, and there
+may not even be a web browser involved. Instead, the client application obtains the
+user’s credentials and exchanges them directly for an access token. This flow
+seems suitable for clients that are not browser based, but modern applications
+often favor asking the user to go to a website in their browser and perform authorization code grant to avoid having to handle the user’s credentials.
+
+ Client credentials grant—This flow is like user credentials grant, except that
+instead of exchanging a user’s credentials for an access token, the client
+exchanges its own credentials for an access token. However, the token granted
+is limited in scope to performing non-user-focused operations and can’t be
+used to act on behalf of a user.

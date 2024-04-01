@@ -1,0 +1,7 @@
+ OAuth 2 in Action: https://www.manning.com/books/oauth-2-in-action
+ Microservices Security in Action: https://www.manning.com/books/microservicessecurity-in-action
+ API Security in Action: https://www.manning.com/books/api-security-in-action
+
+https://oauth.net/2/
+
+http://mng.bz/4KdD
