@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>User Orders</title>
+</head>
+
+<body>
+    <h1>Orders for User: <span th:text="${user.username}"></span></h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Order ID</th>
+                <th>Placed At</th>
+                <th>Delivery Name</th>
+                <th>Delivery Address</th>
+                <th>Delivery City</th>
+                <th>Delivery State</th>
+                <th>Delivery Zip</th>
+                <th>Card Number</th>
+                <th>Card Expiration</th>
+                <th>Card CVV</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="order : ${orders}">
+                <td th:text="${order.id}"></td>
+                <td th:text="${#dates.format(order.placedAt, 'dd-MM-yyyy HH:mm:ss')}"></td>
+                <td th:text="${order.deliveryName}"></td>
+                <td th:text="${order.deliveryStreet}"></td>
+                <td th:text="${order.deliveryCity}"></td>
+                <td th:text="${order.deliveryState}"></td>
+                <td th:text="${order.deliveryZip}"></td>
+                <td th:text="${order.ccNumber}"></td>
+                <td th:text="${order.ccExpiration}"></td>
+                <td th:text="${order.ccCVV}"></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- <div th:if="${orders.totalPages > 1}">
+        <ul class="pagination">
+            <li th:class="${orders.first ? 'disabled' : ''}">
+                <a th:href="@{${#httpServletRequest.contextPath}(page=0)}">&laquo;</a>
+            </li>
+            <li th:each="pageNumber : ${#numbers.sequence(0, orders.totalPages - 1)}"
+                th:class="${pageNumber == orders.number ? 'active' : ''}">
+                <a th:href="@{${#httpServletRequest.contextPath}(page=${pageNumber})}" th:text="${pageNumber + 1}"></a>
+            </li>
+            <li th:class="${orders.last ? 'disabled' : ''}">
+                <a th:href="@{${#httpServletRequest.contextPath}(page=${orders.totalPages - 1})}">&raquo;</a>
+            </li>
+        </ul>
+    </div> -->
+</body>
+
+</html>

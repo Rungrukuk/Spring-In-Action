@@ -64,7 +64,7 @@ public class SecurityConfig {
                         .requestMatchers("/design", "/orders").hasRole("USER")
                         .requestMatchers("/", "/**").permitAll())
                 .formLogin((formLogin) -> formLogin
-                        .defaultSuccessUrl("/design", true)
+                        .defaultSuccessUrl("/orders", true)
                         .loginPage("/login"))
                 .logout(logout -> logout.logoutSuccessUrl("/"));
         // .oauth2Login(oauth2login -> oauth2login.loginPage("/login")); --- Logging in

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Page;
 // import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 // import org.springframework.security.core.context.SecurityContextHolder;
@@ -15,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
@@ -71,15 +73,24 @@ public class OrderController {
         orderRepo.save(order);
         log.info("Processing order: {}", order);
         sessionStatus.setComplete();
-        return "redirect:/";
+        return "redirect:orders";
     }
 
     @GetMapping
-    public String ordersForUser(
-            @AuthenticationPrincipal User user, Model model) {
-        Pageable pageable = PageRequest.of(0, props.getPageSize());
-        model.addAttribute("orders",
-                orderRepo.findByUserOrderByPlacedAtDesc(user, pageable));
+    public String ordersForUser(@AuthenticationPrincipal User user,
+            @RequestParam(name = "page", required = false, defaultValue = "0") int page,
+            Model model) {
+        page = Math.max(0, page);
+
+        Pageable pageable = PageRequest.of(page, props.getPageSize());
+        Page<TacoOrder> ordersPage = orderRepo.findByUserOrderByPlacedAtDesc(user, pageable);
+        model.addAttribute("orders", ordersPage);
+        model.addAttribute("user", user);
+        model.addAttribute("currentPage", page);
+        model.addAttribute("totalPages", ordersPage.getTotalPages());
+        model.addAttribute("hasPrevious", ordersPage.hasPrevious());
+        model.addAttribute("hasNext", ordersPage.hasNext());
+
         return "orderList";
     }
 

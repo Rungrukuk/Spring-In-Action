@@ -9,23 +9,26 @@ import tacos.repository.IngredientRepository;
 import tacos.repository.TacoRepository;
 import tacos.repository.UserRepository;
 
-import java.util.Arrays;
+// import java.util.Arrays;
 
 // import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.CommandLineRunner;
 
 import tacos.domain.Ingredient;
 import tacos.domain.Ingredient.Type;
-import tacos.domain.Taco;
+// import tacos.domain.Taco;
 
 @Configuration
 public class DataLoaderConfig {
         // @Bean
+        //
         // +++++++++++++++++++++++++++++++++Profiles+++++++++++++++++++++++++++++++++++
-        // @Profile("dev") this means that This code will work only in the development
+        // @Profile("dev") this means that This code will work only in the
+        // development
         // @Profile({"dev", "qa"}) This is for dev and qa profiles
         // @Profile("!prod") if profile is not prod
         // * Also profile annotations can be used on classes too
+        //
         // ---------------------------------Profiles-----------------------------------
         // public ApplicationRunner dataLoader(IngredientRepository repo) {
         // return args -> {
@@ -80,24 +83,27 @@ public class DataLoaderConfig {
                         repo.save(salsa);
                         repo.save(sourCream);
 
-                        Taco taco1 = new Taco();
-                        taco1.setName("Carnivore");
-                        taco1.setIngredients(Arrays.asList(
-                                        flourTortilla, groundBeef, carnitas,
-                                        sourCream, salsa, cheddar));
-                        tacoRepo.save(taco1);
-                        Taco taco2 = new Taco();
-                        taco2.setName("Bovine Bounty");
-                        taco2.setIngredients(Arrays.asList(
-                                        cornTortilla, groundBeef, cheddar,
-                                        jack, sourCream));
-                        tacoRepo.save(taco2);
-                        Taco taco3 = new Taco();
-                        taco3.setName("Veg-Out");
-                        taco3.setIngredients(Arrays.asList(
-                                        flourTortilla, cornTortilla, tomatoes,
-                                        lettuce, salsa));
-                        tacoRepo.save(taco3);
+                        // Taco taco1 = new Taco();
+                        // taco1.setId((long) 1);
+                        // taco1.setName("Carnivore");
+                        // taco1.setIngredients(Arrays.asList(
+                        // flourTortilla, groundBeef, carnitas,
+                        // sourCream, salsa, cheddar));
+                        // tacoRepo.save(taco1);
+                        // Taco taco2 = new Taco();
+                        // taco2.setId((long) 2);
+                        // taco2.setName("Bovine Bounty");
+                        // taco2.setIngredients(Arrays.asList(
+                        // cornTortilla, groundBeef, cheddar,
+                        // jack, sourCream));
+                        // tacoRepo.save(taco2);
+                        // Taco taco3 = new Taco();
+                        // taco3.setId((long) 3);
+                        // taco3.setName("Veg-Out");
+                        // taco3.setIngredients(Arrays.asList(
+                        // flourTortilla, cornTortilla, tomatoes,
+                        // lettuce, salsa));
+                        // tacoRepo.save(taco3);
                 };
         }
 

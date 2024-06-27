@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import tacos.domain.Ingredient;
+import tacos.dto.IngredientDTO;
 import tacos.repository.IngredientRepository;
 
 @RestController
@@ -32,6 +33,12 @@ public class IngredientController {
         return repo.findAll();
     }
 
+    @GetMapping("/{id}")
+    public IngredientDTO getIngredientById(@PathVariable("id") String ingredientId) {
+        Ingredient ingredient = repo.getReferenceById(ingredientId);
+        return new IngredientDTO(ingredient.getId(), ingredient.getName(), ingredient.getType());
+    }
+
     @PostMapping
     @PreAuthorize("#{hasRole('ADMIN')}")
     @ResponseStatus(HttpStatus.CREATED)
@@ -41,8 +48,9 @@ public class IngredientController {
 
     @DeleteMapping("/{id}")
     @PreAuthorize("#{hasRole('ADMIN')}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteIngredient(@PathVariable("id") String ingredientId) {
+    @ResponseStatus(HttpStatus.OK)
+    public String deleteIngredient(@PathVariable("id") String ingredientId) {
         repo.deleteById(ingredientId);
+        return "{}";
     }
 }

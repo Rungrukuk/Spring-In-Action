@@ -1,9 +1,14 @@
 package tacos.web.api;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -15,26 +20,68 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+
+import lombok.extern.slf4j.Slf4j;
 import tacos.domain.Taco;
 import tacos.repository.TacoRepository;
+import tacos.utils.PageInfo;
 
+@Slf4j
 @RestController
 @RequestMapping(path = "/api/tacos", produces = "application/json")
 @CrossOrigin(origins = "http://tacocloud:8080")
 public class TacoController {
     private TacoRepository tacoRepo;
 
+    @Autowired
     public TacoController(TacoRepository tacoRepo) {
         this.tacoRepo = tacoRepo;
     }
 
-    @GetMapping(params = "recent")
-    public Iterable<Taco> recentTacos() {
-        PageRequest page = PageRequest.of(
-                0, 12, Sort.by("createdAt").descending());
-        return tacoRepo.findAll(page).getContent();
+    @GetMapping
+    public ResponseEntity<Map<String, Object>> getTacos(
+            @RequestParam(value = "page_info", required = false) String pageInfoStr,
+            @RequestParam(value = "limit", defaultValue = "4") int limit) {
+
+        PageInfo pageInfo = null;
+
+        if (pageInfoStr != null) {
+            pageInfo = PageInfo.decodePageInfo(pageInfoStr);
+        }
+
+        PageRequest pageRequest = PageRequest.of(0, limit, Sort.by("createdAt").ascending());
+        log.info("OFFSET: " + pageRequest.getOffset());
+        log.info("PAGE SIZE: " + pageRequest.getPageSize());
+
+        Page<Taco> page;
+
+        if (pageInfo != null && "next".equals(pageInfo.getDirection())) {
+            page = tacoRepo.fetchNextPage(pageInfo.getLastId(), pageInfo.getLastValue(), pageRequest);
+        } else {
+            page = tacoRepo.findAll(pageRequest);
+        }
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("tacos", page.getContent());
+
+        HttpHeaders headers = new HttpHeaders();
+        if (page.hasNext()) {
+            PageInfo nextPageInfo = new PageInfo();
+            nextPageInfo.setLastId(page.getContent().get(page.getContent().size() - 1).getId());
+            nextPageInfo.setLastValue(page.getContent().get(page.getContent().size() - 1).getCreatedAt().toString());
+            nextPageInfo.setDirection("next");
+
+            String nextPageToken = PageInfo.encodePageInfo(nextPageInfo);
+            headers.add(HttpHeaders.LINK,
+                    String.format("</api/tacos?limit=%d&page_info=%s>; rel=\"next\"", limit, nextPageToken));
+        }
+
+        return ResponseEntity.ok()
+                .headers(headers)
+                .body(response);
     }
 
     @GetMapping("/{id}")

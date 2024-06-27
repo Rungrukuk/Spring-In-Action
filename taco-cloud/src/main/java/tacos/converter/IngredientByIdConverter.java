@@ -2,6 +2,7 @@ package tacos.converter;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
+import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Component;
 // -------------------------------- Cassandra --------------------------------
 // import tacos.domain.IngredientUDT;
@@ -36,7 +37,7 @@ public class IngredientByIdConverter implements Converter<String, Ingredient> {
     }
 
     @Override
-    public Ingredient convert(String id) {
+    public Ingredient convert(@NonNull String id) {
         return ingredientRepo.findById(id).orElse(null);
     }
 }
