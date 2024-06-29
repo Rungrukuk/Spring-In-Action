@@ -1,0 +1,34 @@
+Authorization Code Curl:
+curl --location 'localhost:9000/oauth2/token' \
+--header 'Content-type: application/x-www-form-urlencoded' \
+--header 'Authorization: Basic dGFjby1hZG1pbi1jbGllbnQ6c2VjcmV0' \
+--header 'Cookie: JSESSIONID=8B1F74F19D74722E9CE02D25CF1086B6' \
+--data-urlencode 'grant_type=authorization_code' \
+--data-urlencode 'redirect_uri=http://localhost:9000/login/oauth2/code/taco-admin-client' \
+--data-urlencode 'code=4zNvDnWzWs2c9yGBTM8-TzIcCmB5nTzEOO4nNkSK3TxNocqo8u2x8PAmrbARCXC949oiOVQU1Zfm2sX4rnSSgg614zNpw6eUFJSkEBq8FyQPkyn9mCsE79fcaDIpt4B8'
+
+Refresh Curl:
+curl --location 'localhost:9000/oauth2/token' \
+--header 'Content-type: application/x-www-form-urlencoded' \
+--header 'Authorization: Basic dGFjby1hZG1pbi1jbGllbnQ6c2VjcmV0' \
+--header 'Cookie: JSESSIONID=8B1F74F19D74722E9CE02D25CF1086B6' \
+--data-urlencode 'grant_type=refresh_token&refresh_token=DblQJs5zDjWO6UVzXMvIBFljaa7J5W48D2DzDiBnAkglHsgXlee7tlN-AtDD4_ASn_7adrsJJzkJVei5FJ5LzHI83_4O-AZ4kxUk08QJDeJX8VzqMRgMy_a-_5NyyUHp' \
+
+Request URL:
+http://localhost:9000/oauth2/authorize?response_type=code&client_id=taco-admin-client&redirect_uri=http://localhost:9000/login/oauth2/code/taco-admin-client&scope=writeIngredients+deleteIngredients
+
+
+Response:
+{
+  "sub": "tacochef",
+  "aud": "taco-admin-client",
+  "nbf": 1719694394,
+  "scope": [
+    "deleteIngredients",
+    "writeIngredients"
+  ],
+  "iss": "http://localhost:9000",
+  "exp": 1719694694,
+  "iat": 1719694394,
+  "jti": "dcf9d2e4-3224-469c-a205-24ecdd0c640c"
+}

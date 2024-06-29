@@ -40,14 +40,14 @@ public class IngredientController {
     }
 
     @PostMapping
-    @PreAuthorize("#{hasRole('ADMIN')}")
+    @PreAuthorize("{hasRole('ADMIN')}")
     @ResponseStatus(HttpStatus.CREATED)
     public Ingredient saveIngredient(@RequestBody Ingredient ingredient) {
         return repo.save(ingredient);
     }
 
     @DeleteMapping("/{id}")
-    @PreAuthorize("#{hasRole('ADMIN')}")
+    @PreAuthorize("{hasRole('ADMIN')}")
     @ResponseStatus(HttpStatus.OK)
     public String deleteIngredient(@PathVariable("id") String ingredientId) {
         repo.deleteById(ingredientId);
