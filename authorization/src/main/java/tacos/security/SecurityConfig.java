@@ -12,6 +12,7 @@ import com.nimbusds.jose.jwk.source.ImmutableJWKSet;
 import com.nimbusds.jose.jwk.source.JWKSource;
 import com.nimbusds.jose.proc.SecurityContext;
 
+// import lombok.extern.slf4j.Slf4j;
 import tacos.repository.UserRepository;
 
 import org.springframework.context.annotation.Bean;
@@ -40,6 +41,7 @@ import org.springframework.security.web.util.matcher.MediaTypeRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
+// @Slf4j
 public class SecurityConfig {
 
     @Bean
