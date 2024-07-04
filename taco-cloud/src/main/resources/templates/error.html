@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Error</title>
+</head>
+
+<body>
+    <h1>Error occurred</h1>
+    <p>Status: <span th:text="${errorAttributes['status']}"></span></p>
+    <p>Error: <span th:text="${errorAttributes['error']}"></span></p>
+    <p>Message: <span th:text="${errorAttributes['message']}"></span></p>
+    <p>Path: <span th:text="${errorAttributes['path']}"></span></p>
+    <p>Exception: <span th:text="${errorAttributes['exception']}"></span></p>
+    <p>Trace:
+    <pre th:text="${errorAttributes['trace']}"></pre>
+    </p>
+</body>
+
+</html>

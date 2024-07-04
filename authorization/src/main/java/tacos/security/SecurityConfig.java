@@ -89,7 +89,7 @@ public class SecurityConfig {
                 .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
                 .authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN)
                 .redirectUri(
-                        "http://localhost:9000/login/oauth2/code/taco-admin-client")
+                        "http://localhost:8080/login/oauth2/code/taco-admin-client")
                 .scope("writeIngredients")
                 .scope("deleteIngredients")
                 .scope(OidcScopes.OPENID)

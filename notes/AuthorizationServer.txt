@@ -15,7 +15,7 @@ curl --location 'localhost:9000/oauth2/token' \
 --data-urlencode 'grant_type=refresh_token&refresh_token=DblQJs5zDjWO6UVzXMvIBFljaa7J5W48D2DzDiBnAkglHsgXlee7tlN-AtDD4_ASn_7adrsJJzkJVei5FJ5LzHI83_4O-AZ4kxUk08QJDeJX8VzqMRgMy_a-_5NyyUHp' \
 
 Request URL:
-http://localhost:9000/oauth2/authorize?response_type=code&client_id=taco-admin-client&redirect_uri=http://localhost:9000/login/oauth2/code/taco-admin-client&scope=writeIngredients+deleteIngredients
+http://localhost:9000/oauth2/authorize?response_type=code&client_id=taco-admin-client&redirect_uri=http://localhost:8080/login/oauth2/code/taco-admin-client&scope=writeIngredients+deleteIngredients
 
 
 Response:
