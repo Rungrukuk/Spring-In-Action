@@ -1,5 +1,6 @@
 package tacos.domain;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -17,6 +18,7 @@ import jakarta.validation.constraints.Size;
  */
 
 import jakarta.persistence.Entity;//   --- JPA
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;//   --- JPA
 import jakarta.persistence.GenerationType;//   --- JPA
 import jakarta.persistence.Id;//   --- JPA
@@ -40,7 +42,7 @@ import lombok.Data;
 @Entity // --- JPA
 // @Table("tacos")
 @RestResource(rel = "tacos", path = "tacos") // This is for setting the api path to tacos instead tacoes
-public class Taco {
+public class Taco implements Serializable {
 
     @Id // --- JPA
     @GeneratedValue(strategy = GenerationType.AUTO) // --- JPA
@@ -57,7 +59,7 @@ public class Taco {
     private Date createdAt = new Date();
 
     @Size(min = 1, message = "You must choose at least 1 ingredient")
-    @ManyToMany // --- JPA
+    @ManyToMany(fetch = FetchType.EAGER) // --- JPA
     // @Column("ingredients") --- Cassandra
     private List<Ingredient> ingredients = new ArrayList<>();
 

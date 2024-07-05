@@ -86,7 +86,7 @@ public class TacoOrder implements Serializable {
     @Digits(integer = 3, fraction = 0, message = "Invalid CVV")
     private String ccCVV;
 
-    @OneToMany(cascade = CascadeType.ALL) // --- JPA
+    @OneToMany(cascade = CascadeType.PERSIST) // --- JPA
     // @Column("tacos") --- Cassandra
     private List<Taco> tacos = new ArrayList<>();
 
