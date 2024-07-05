@@ -1,5 +1,6 @@
 package tacos.domain;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -40,7 +41,7 @@ import lombok.Data;
 @Entity // --- JPA
 // @Table("tacos")
 @RestResource(rel = "tacos", path = "tacos") // This is for setting the api path to tacos instead tacoes
-public class Taco {
+public class Taco implements Serializable {
 
     @Id // --- JPA
     @GeneratedValue(strategy = GenerationType.AUTO) // --- JPA

@@ -1,5 +1,7 @@
 package tacos.domain;
 
+import java.io.Serializable;
+
 // import org.springframework.data.annotation.Id; // * Both for JDBC and Mongo
 // import org.springframework.data.mongodb.core.mapping.Document; // * Mongo
 
@@ -20,7 +22,7 @@ import lombok.NoArgsConstructor;
 // @Document(collection = "ingredients")
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
-public class Ingredient {
+public class Ingredient implements Serializable {
     // * @Id --- JPA
     // * @PrimaryKey --- Cassandra
     @Id
