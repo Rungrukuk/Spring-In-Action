@@ -6,7 +6,7 @@ import org.springframework.jms.core.JmsTemplate;
 // import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 
-import jakarta.jms.Destination;
+// import jakarta.jms.Destination;
 // import jakarta.jms.JMSException;
 // import jakarta.jms.Message;
 import tacos.domain.TacoOrder;
@@ -15,18 +15,19 @@ import tacos.domain.TacoOrder;
 public class JmsOrderMessagingService implements OrderMessagingService {
     private final JmsTemplate jms;
 
-    private Destination orderQueue;
+    // private Destination orderQueue;
 
     @Autowired
-    public JmsOrderMessagingService(JmsTemplate jms,
-            Destination orderQueue) {
+    public JmsOrderMessagingService(JmsTemplate jms
+    // , Destination orderQueue
+    ) {
         this.jms = jms;
-        this.orderQueue = orderQueue;
+        // this.orderQueue = orderQueue;
     }
 
     @Override
     public void sendOrder(TacoOrder order) {
-        jms.convertAndSend(orderQueue, order,
+        jms.convertAndSend("tacocloud.order.queue", order,
                 message -> {
                     message.setStringProperty("X_ORDER_SOURCE", "WEB");
                     return message;

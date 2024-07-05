@@ -14,13 +14,16 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository; // Better version of CRUD repository
 // import org.springframework.data.jpa.repository.Query; --- JPA
 // import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.Query;
 
 public interface OrderRepository extends JpaRepository<TacoOrder, String> {
 
     Page<TacoOrder> findByUserOrderByPlacedAtDesc(User user, Pageable pageable);
+
     // ? CRUD Repository already have this methods by default - This Interface can
     // work with both JPA and JDCB-Data
-
+    @Query("SELECT COALESCE(MAX(o.id), 0) FROM TacoOrder o")
+    Long findMaxId();
     // * Spring is clever enough to create this method by parsing it's name
     // List<TacoOrder> findByDeliveryZip(String Zip);
 
