@@ -18,7 +18,7 @@ import jakarta.validation.constraints.Size;
  */
 
 import jakarta.persistence.Entity;//   --- JPA
-import jakarta.persistence.FetchType;
+// import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;//   --- JPA
 import jakarta.persistence.GenerationType;//   --- JPA
 import jakarta.persistence.Id;//   --- JPA
@@ -59,7 +59,7 @@ public class Taco implements Serializable {
     private Date createdAt = new Date();
 
     @Size(min = 1, message = "You must choose at least 1 ingredient")
-    @ManyToMany(fetch = FetchType.EAGER) // --- JPA
+    @ManyToMany // --- JPA
     // @Column("ingredients") --- Cassandra
     private List<Ingredient> ingredients = new ArrayList<>();
 
