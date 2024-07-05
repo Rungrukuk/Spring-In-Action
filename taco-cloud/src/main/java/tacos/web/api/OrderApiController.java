@@ -42,7 +42,6 @@ public class OrderApiController {
     @ResponseStatus(HttpStatus.CREATED)
     @Transactional
     public TacoOrder postOrder(@RequestBody @Valid TacoOrder order) {
-        // Set a unique ID for the order
         Long maxId = orderRepo.findMaxId();
         order.setId(maxId + 1);
 

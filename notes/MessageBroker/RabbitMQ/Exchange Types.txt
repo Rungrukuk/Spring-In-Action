@@ -1,0 +1,17 @@
+ Default—A special exchange that’s automatically created by the broker. It routes
+messages to queues whose name is the same as the message’s routing key. All
+queues will automatically be bound to the default exchange.
+
+ Direct—Routes messages to a queue whose binding key is the same as the message’s routing key.
+
+ Topic—Routes a message to one or more queues where the binding key (which
+may contain wildcards) matches the message’s routing key.
+
+ Fanout—Routes messages to all bound queues without regard for binding keys
+or routing keys.
+
+ Headers—Similar to a topic exchange, except that routing is based on message
+header values rather than routing keys.
+
+ Dead letter—A catchall for any messages that are undeliverable (meaning they
+don’t match any defined exchange-to-queue binding).
