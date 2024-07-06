@@ -1,8 +1,6 @@
 package tacos.domain;
 
-import java.util.Arrays;
-import java.util.Collection;
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -17,12 +15,16 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 
+import java.util.Arrays;
+import java.util.Collection;
+
 @Entity()
 @Data
 @NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
 @Table(name = "AppUser")
 @RequiredArgsConstructor
 public class User implements UserDetails {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -36,6 +38,7 @@ public class User implements UserDetails {
     private final String zip;
     private final String phoneNumber;
 
+    @JsonIgnore
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return Arrays.asList(new SimpleGrantedAuthority("ROLE_USER"));
@@ -60,5 +63,4 @@ public class User implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
-
 }
