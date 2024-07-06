@@ -25,7 +25,7 @@ public class KafkaConfig {
     public KafkaListenerContainerFactory<ConcurrentMessageListenerContainer<String, TacoOrder>> kafkaListenerContainerFactory() {
         ConcurrentKafkaListenerContainerFactory<String, TacoOrder> factory = new ConcurrentKafkaListenerContainerFactory<>();
         factory.setConsumerFactory(consumerFactory());
-        factory.setConcurrency(3);
+        // factory.setConcurrency(3);
         factory.getContainerProperties().setPollTimeout(3000);
         return factory;
     }
