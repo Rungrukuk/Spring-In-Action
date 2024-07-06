@@ -12,13 +12,13 @@ import tacos.repository.TacoRepository;
 import tacos.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
-import lombok.extern.slf4j.Slf4j;
+// import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@Slf4j
+// @Slf4j
 @CrossOrigin(origins = "http://localhost:8080")
 @RestController
 @RequestMapping(path = "/api/orders", produces = "application/json")
@@ -67,7 +67,6 @@ public class OrderApiController {
         order.setUser(user);
 
         messageService.sendOrder(order);
-        log.info(order.toString());
         return orderRepo.save(order);
     }
 }

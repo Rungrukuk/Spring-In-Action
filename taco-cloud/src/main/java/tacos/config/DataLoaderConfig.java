@@ -107,7 +107,7 @@ public class DataLoaderConfig {
                         tacoRepo.save(taco3);
                         User user = new User(
                                         "Rungrukuk",
-                                        "123",
+                                        "$2a$12$hCuqZAThwyEqkwWt9kpN9uSgeDEybz1ucNoOkif2CZSxXMW6.PPQ2",
                                         "Kamal Azizov",
                                         "street",
                                         "city",
