@@ -37,7 +37,6 @@
 // order.getTacos().forEach(taco -> taco.getIngredients().size());
 // return order;
 // } catch (MessageConversionException | JMSException e) {
-// // TODO Auto-generated catch block
 // e.printStackTrace();
 // }
 // // Initialize the collection here
