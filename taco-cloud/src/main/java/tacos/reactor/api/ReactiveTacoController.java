@@ -47,9 +47,20 @@ public class ReactiveTacoController {
         return tacoRepo.saveAll(tacoMono).next();
     }
 
+    // @PostMapping(consumes = "application/json")
+    // @ResponseStatus(HttpStatus.CREATED)
+    // public Mono<Taco> postTaco(@RequestBody Mono<Taco> tacoMono) {
+    // return tacoMono.flatMap(tacoRepo::save);
+    // }
+
     // @GetMapping(params = "recent")
     // public Observable<Taco> recentTacos() {
     // return tacoService.getRecentTacos();
+    // }
+
+    // @GetMapping("/{id}")
+    // public Single<Taco> tacoById(@PathVariable("id") Long id) {
+    // return tacoService.lookupTaco(id);
     // }
 
 }
