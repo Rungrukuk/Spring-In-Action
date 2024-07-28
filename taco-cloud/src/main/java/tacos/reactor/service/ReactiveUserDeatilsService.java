@@ -7,7 +7,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import reactor.core.publisher.Mono;
 import tacos.reactor.repository.ReactiveUserRepository;
 
-public class UserDeatilsService {
+public class ReactiveUserDeatilsService {
     @Bean
     public ReactiveUserDetailsService userDetailsService(
             ReactiveUserRepository userRepo) {

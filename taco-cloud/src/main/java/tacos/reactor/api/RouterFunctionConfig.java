@@ -12,7 +12,7 @@ import org.springframework.web.reactive.function.server.RouterFunction;
 import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
 import reactor.core.publisher.Mono;
-import tacos.domain.Taco;
+import tacos.reactor.domain.ReactiveTaco;
 import tacos.reactor.repository.ReactiveTacoRepository;
 
 @Configuration
@@ -30,18 +30,19 @@ public class RouterFunctionConfig {
 
     public Mono<ServerResponse> recents(ServerRequest request) {
         return ServerResponse.ok()
-                .body(tacoRepo.findAll().take(12), Taco.class);
+                .body(tacoRepo.findAll().take(12), ReactiveTaco.class);
     }
 
     public Mono<ServerResponse> postTaco(ServerRequest request) {
-        return request.bodyToMono(Taco.class)
+        return request.bodyToMono(
+                ReactiveTaco.class)
                 .flatMap(taco -> tacoRepo.save(taco))
                 .flatMap(savedTaco -> {
                     return ServerResponse
                             .created(URI.create(
                                     "http://localhost:8080/api/tacos/" +
                                             savedTaco.getId()))
-                            .body(savedTaco, Taco.class);
+                            .body(savedTaco, ReactiveTaco.class);
                 });
     }
 }

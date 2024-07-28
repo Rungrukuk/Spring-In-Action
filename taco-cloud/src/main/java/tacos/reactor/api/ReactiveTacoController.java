@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-import tacos.domain.Taco;
+import tacos.reactor.domain.ReactiveTaco;
 import tacos.reactor.repository.ReactiveTacoRepository;
 
 @RestController
@@ -30,34 +30,35 @@ public class ReactiveTacoController {
     }
 
     @GetMapping("/{id}")
-    public Mono<Taco> tacoById(@PathVariable("id") Long id) {
+    public Mono<ReactiveTaco> tacoById(@PathVariable("id") Long id) {
         return tacoRepo.findById(id);
     }
 
     @GetMapping(params = "recent")
-    public Flux<Taco> recentTacos() {
+    public Flux<ReactiveTaco> recentTacos() {
         return tacoRepo.findAll().take(12);
     }
 
     @PostMapping(consumes = "application/json")
     @ResponseStatus(HttpStatus.CREATED)
-    public Mono<Taco> postTaco(@RequestBody Mono<Taco> tacoMono) {
+    public Mono<ReactiveTaco> postTaco(@RequestBody Mono<ReactiveTaco> tacoMono) {
         return tacoRepo.saveAll(tacoMono).next();
     }
 
     // @PostMapping(consumes = "application/json")
     // @ResponseStatus(HttpStatus.CREATED)
-    // public Mono<Taco> postTaco(@RequestBody Mono<Taco> tacoMono) {
+    // public Mono<ReactiveTaco> postTaco(@RequestBody
+    // Mono<ReactiveTaco> tacoMono) {
     // return tacoMono.flatMap(tacoRepo::save);
     // }
 
     // @GetMapping(params = "recent")
-    // public Observable<Taco> recentTacos() {
+    // public Observable<ReactiveTaco> recentTacos() {
     // return tacoService.getRecentTacos();
     // }
 
     // @GetMapping("/{id}")
-    // public Single<Taco> tacoById(@PathVariable("id") Long id) {
+    // public Single<ReactiveTaco> tacoById(@PathVariable("id") Long id) {
     // return tacoService.lookupTaco(id);
     // }
 
