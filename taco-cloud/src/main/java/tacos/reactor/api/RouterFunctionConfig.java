@@ -13,7 +13,7 @@ import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
 import reactor.core.publisher.Mono;
 import tacos.domain.Taco;
-import tacos.repository.ReactiveTacoRepository;
+import tacos.reactor.repository.ReactiveTacoRepository;
 
 @Configuration
 public class RouterFunctionConfig {
