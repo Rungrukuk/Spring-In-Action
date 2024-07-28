@@ -5,6 +5,8 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 import org.springframework.data.annotation.Id;
+
+import jakarta.persistence.Transient;
 import lombok.Data;
 
 @Data
@@ -22,9 +24,13 @@ public class ReactiveTacoOrder {
     private String ccCVV;
 
     private Set<Long> tacoIds = new LinkedHashSet<>();
-    private List<ReactiveTaco> tacos = new ArrayList<>();
+    @Transient
+    private transient List<ReactiveTaco> tacos = new ArrayList<>();
 
     public void addTaco(ReactiveTaco taco) {
         this.tacos.add(taco);
+        if (taco.getId() != null) {
+            this.tacoIds.add(taco.getId());
+        }
     }
 }
